@@ -11,9 +11,9 @@ export default {
  middleware:["auth", "role:2"],
 
   metaInfo() {
-    return { title: this.$t("Meza de partes") };
+    return { title: this.$t("Controlador") };
   },
-
+ 
 };
 </script>
 

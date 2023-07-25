@@ -60,6 +60,16 @@
             >
               Ingresar
             </v-btn>
+
+            <v-btn
+              dark
+              class="mr-4 mt-2"
+              type="submit"
+              block
+              to="/register"
+            >
+              REGISTRATE
+            </v-btn>
           </v-form>
         </v-card-text>
       </v-card>

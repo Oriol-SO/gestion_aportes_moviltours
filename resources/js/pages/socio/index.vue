@@ -8,10 +8,10 @@
 
 <script>
 export default {
-middleware: "auth",
+ middleware:["auth", "role:1"],
 
   metaInfo() {
-    return { title: this.$t("evaluador") };
+    return { title: this.$t("Socio accionista") };
   },
 
 };

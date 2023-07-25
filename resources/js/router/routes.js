@@ -25,36 +25,30 @@ export default [
     ]
   },
   {
-    path: '/admin',
+    path: '/socio',
+    component: page('socio/index.vue'),
+    children: [
+      { path: '', redirect: { name: 'dash.socio' } },
+      { path: 'dashboard', name: 'dash.socio', component: page('socio/dashboard.vue') },
+    ]
+  },
+  {
+    path: '/controlador',
+    component: page('controlador/index.vue'),
+    children: [
+      { path: '', redirect: { name: 'dash.controlador' } },
+      { path: 'dashboard', name: 'dash.controlador', component: page('controlador/dashboard.vue') },
+    ]
+  },
+  {
+    path: '/administrador',
     component: page('admin/index.vue'),
     children: [
       { path: '', redirect: { name: 'dash.admin' } },
       { path: 'dashboard', name: 'dash.admin', component: page('admin/dashboard.vue') },
     ]
   },
-  {
-    path: '/meza-de-partes',
-    component: page('meza/index.vue'),
-    children: [
-      { path: '', redirect: { name: 'dash.meza' } },
-      { path: 'dashboard', name: 'dash.meza', component: page('meza/dashboard.vue') },
-    ]
-  },
-  {
-    path: '/unidad-organica',
-    component: page('unidad/index.vue'),
-    children: [
-      { path: '', redirect: { name: 'dash.unidad' } },
-      { path: 'dashboard', name: 'dash.unidad', component: page('unidad/dashboard.vue') },
-    ]
-  },
 
   { path: '*', component: page('errors/404.vue') },
 
-  //PRUEBAS
-
-  { path: '/prueba', name: 'prueba', component: page('pruebas/pruebaPadre.vue') },
-  { path: '/pdf', name: 'pdf', component: page('pruebas/pdf.vue') },
-  { path: '/reporte', name: 'reporte', component: page('pruebas/reporte.vue') },
-  {path: '/correo', name:'correo', component:page('pruebas/correo.vue')},
 ]

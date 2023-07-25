@@ -1,80 +1,64 @@
 <template>
-  <v-card style="background-color: #893143;">
-    <v-icon>mdi-key</v-icon>
-  </v-card>
+  <div>
+      <v-card class="ma-3" >
+          <v-card-title>
+          Administración de veiculos
+          <reportes />          
+          </v-card-title>
+          <v-card-title>
+            <v-text-field
+            v-model="search"
+            color="orange"
+            label="Buscar el  veiculo"
+            ></v-text-field>
+          </v-card-title>
+          <v-card-text>
+              <v-data-table
+                  :search="search"
+                  :headers="headers"
+                  :items="veiculos"
+                  :items-per-page="15"
+                  class="elevation-1"
+              >
+                  <template v-slot:item.actions="{ item }">
+                      <addaporte :veiculo="item" />
+                  </template>
+              </v-data-table>
+          </v-card-text>
+      </v-card>
+  </div>
 </template>
 <script>
+import addaporte from '../controlador/components/addaporte.vue'
+import reportes from './components/reportes.vue'
+import {mapGetters,mapActions} from 'vuex'
 export default {
-  data() {
-    return {
-        buscar: "",
-      encabezado: [
-        {
-          text: "Nombres",
-          value: "name"
-        },
-        {
-          text: "Edad",
-          value: "edad_alumno"
-        },
-        {
-          text: "Semestre",
-          value: "sem"
-        }
+components:{
+  addaporte,
+  reportes,
+},
+data(){
+  return{
+      search:'',
+      headers:[
+        { text: 'Socio', value: 'socio_nombre' },
+        { text: 'Placa', value: 'placa' },
+        { text: 'Dni',   value: 'socio_dni' },
+        { text: 'Color', value: 'color' },
+        { text: 'Marca', value: 'marca' },
+        { text: 'Modelo', value: 'modelo' },
+        { text: '', value: 'actions' },
       ],
-      alumnos: [
-        {
-          name: "Eduardo",
-          edad_alumno: 23,
-          sem: "X"
-        },
-        {
-          name: "Eduardo",
-          edad_alumno: 23,
-          sem: "X"
-        },
-        {
-          name: "Eduardo",
-          edad_alumno: 23,
-          sem: "X"
-        },
-        {
-          name: "Eduardo",
-          edad_alumno: 23,
-          sem: "X"
-        },
-        {
-          name: "Eduardo",
-          edad_alumno: 23,
-          sem: "X"
-        },
-        {
-          name: "AAAAAA",
-          edad_alumno: 23,
-          sem: "X"
-        },
-        {
-          name: "Eduardo",
-          edad_alumno: 23,
-          sem: "X"
-        },
-        {
-          name: "Eduardo",
-          edad_alumno: 23,
-          sem: "X"
-        },
-        {
-          name: "Eduardo",
-          edad_alumno: 23,
-          sem: "X"
-        },
-        {
-          name: "Eduardo",
-          edad_alumno: 23,
-          sem: "X"
-        }
-      ]
-    };
   }
-};
+},computed:{
+  ...mapGetters({
+    veiculos:'control/veiculos',
+  }),
+},methods:{
+  ...mapActions('control',['getVeiculos']),
+},created(){
+  this.getVeiculos();
+}
+
+}
 </script>

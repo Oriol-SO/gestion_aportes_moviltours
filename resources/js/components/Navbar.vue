@@ -6,7 +6,7 @@
       <v-toolbar-title >{{ appName }}</v-toolbar-title>
       <v-spacer></v-spacer>
 
-      <v-btn v-for="(link, i) in linksVerified" :key="i"  plain :to="link.path" color="#fff"  >
+      <v-btn v-for="(link, i) in linksVerified" :key="i"  plain :to="{name:link.path}" color="#fff"  >
         {{ link.name }}
       </v-btn>
 
@@ -65,7 +65,7 @@ export default {
     // { name: "Iniciar sesión", path: "/login", notUser: true },
     // { name: "Registrarme", path: "/registro", notUser: true },
     //],
-    bgNavbar: "rgb(13 129 225)",
+    bgNavbar: "#eb7a42",
     colorletra:'#fff',
     rounded:false,
     letra_color:'#fff'
@@ -74,9 +74,10 @@ export default {
   computed: {
     ...mapGetters({
       user: "auth/user",
+      firsroute:'auth/firstRoute'
     }),
     linksVerified: function () {
-      return [{ name: "Inicio", path: "/home" }];
+      return [{ name:'INICIO',path:this.firsroute}];
       //return this.links.filter((link) => !(link.notUser && this.user));
     },
 

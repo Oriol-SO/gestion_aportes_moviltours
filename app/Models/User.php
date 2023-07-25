@@ -24,6 +24,11 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
         'name',
         'email',
         'password',
+        'dni',
+        'rol_id',
+        'telefono',
+        'estado',
+        'email_verified_at',
     ];
 
     /**
@@ -53,6 +58,10 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
     protected $appends = [
         'photo_url',
     ];
+
+    public function veiculo(){
+        return $this->hasMany(Veiculo::class,'user_id','id');
+    }
 
     /**
      * Get the profile photo URL attribute.

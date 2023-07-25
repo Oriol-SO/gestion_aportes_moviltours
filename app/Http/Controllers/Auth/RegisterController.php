@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
@@ -42,6 +43,10 @@ class RegisterController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email:filter|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
+            'password_confirmation'=>'required',
+            'telefono'=>'required',
+            'dni'=>'required',
+            'rol'=>'required|integer'
         ]);
     }
 
@@ -54,6 +59,10 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'dni'=>$data['dni'],
+            'telefono'=>$data['telefono'],
+            'rol_id'=>$data['rol'],
+            'email_verified_at'=>Carbon::now(),
         ]);
     }
 }

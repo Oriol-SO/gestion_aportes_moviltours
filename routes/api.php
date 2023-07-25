@@ -7,11 +7,13 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\UserController;
 use App\Http\Controllers\Auth\VerificationController;
+use App\Http\Controllers\ControladoraController;
 use App\Http\Controllers\Correos;
 use App\Http\Controllers\documentocontroller;
 use App\Http\Controllers\EvaluadorController;
 use App\Http\Controllers\Settings\PasswordController;
 use App\Http\Controllers\Settings\ProfileController;
+use App\Http\Controllers\SocioController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,8 +50,18 @@ Route::group(['middleware' => 'guest:api'], function () {
     Route::get('oauth/{driver}/callback', [OAuthController::class, 'handleCallback'])->name('oauth.callback');
 });
 
-Route::get('evaluadores_lista',[EvaluadorController::class, 'listar_evaluador']);
-Route::post('download-prueba',[documentocontroller::class,'descargar_fut']);
-Route::post('download-prueba-reporte',[documentocontroller::class,'descargar_reporte']);
 
-Route::post('enviarcorreo',[Correos::class,'send_correo']);
+Route::group(['middleware' => 'auth:api'], function () {
+    //SOCIO 
+    
+    Route::post('registrar-veiculo',[SocioController::class,'register_veiculo']);
+    Route::get('get-veiculos',[SocioController::class,'get_veiculos']);
+    Route::get('get-info-veiculo/{id}',[SocioController::class,'get_info_veiculo']);
+
+
+    //CONTROLADORES
+    Route::post('registrar-aporte',[ControladoraController::class,'registrar_aporte']);
+
+    Route::get('get-veiculos-aportes',[ControladoraController::class,'get_veiculos']);
+    Route::post('del-aporte-veiculo',[ControladoraController::class,'del_aporte_veiculo']);
+});

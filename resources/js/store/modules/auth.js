@@ -12,13 +12,13 @@ function getFirstRoute(rol_id) {
   let path = 'unautorized';
   switch (rol_id) {
     case 1:
-      path = 'dash.admin'
+      path = 'dash.socio'
       break;
     case 2:
-      path = 'dash.meza'
+      path = 'dash.controlador'
       break;
     case 3:
-      path = 'dash.unidad'
+      path = 'dash.admin'
       break;
   }
   //console.log(rol_id)

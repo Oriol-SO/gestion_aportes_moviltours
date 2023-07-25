@@ -44,6 +44,17 @@ axios.interceptors.response.use(response => response, error => {
     serverError(error.response)
   }
 
+  if(status ==405 || status==422){
+    Swal.fire({
+      icon: 'warning',
+      title: 'Error al realizar la acción',
+      text: error.response.data.message,
+      reverseButtons: true,
+      confirmButtonText: i18n.t('ok'),
+      cancelButtonText: i18n.t('cancel')
+    })
+  }
+
   return Promise.reject(error)
 })
 
