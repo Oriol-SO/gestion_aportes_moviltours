@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdministradorController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\OAuthController;
@@ -64,4 +65,7 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     Route::get('get-veiculos-aportes',[ControladoraController::class,'get_veiculos']);
     Route::post('del-aporte-veiculo',[ControladoraController::class,'del_aporte_veiculo']);
+
+    //ADMINISTRADOR
+    Route::post('genera-reporte-mes',[AdministradorController::class,'reporte']);
 });
