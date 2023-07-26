@@ -1,51 +1,64 @@
 <template>
-  <v-card :title="$t('your_info')">
+  <v-card :title="$t('your_info')" class="ma-5 pa-3">
     <form @submit.prevent="update" @keydown="form.onKeydown($event)">
-      <alert-success :form="form" :message="$t('info_updated')" />
-
-      <!-- Name -->
-      <div class="mb-3 row">
-        <label class="col-md-3 col-form-label text-md-end">{{
-          $t("name")
-        }}</label>
-        <div class="col-md-7">
-          <input
-            v-model="form.name"
-            :class="{ 'is-invalid': form.errors.has('name') }"
-            class="form-control"
-            type="text"
-            name="name"
-          />
-          <has-error :form="form" field="name" />
-        </div>
-      </div>
-
-      <!-- Email -->
-      <div class="mb-3 row">
-        <label class="col-md-3 col-form-label text-md-end">{{
-          $t("email")
-        }}</label>
-        <div class="col-md-7">
-          <input
-            v-model="form.email"
-            :class="{ 'is-invalid': form.errors.has('email') }"
-            class="form-control"
-            type="email"
-            name="email"
-          />
-          <has-error :form="form" field="email" />
-        </div>
-      </div>
-
-      <!-- Submit Button -->
-      <div class="mb-3 row">
-        <div class="col-md-9 ms-md-auto">
-          <v-btn :loading="form.busy" type="success">
-            {{ $t("update") }}
-          </v-btn>
-        </div>
-      </div>
+      <v-row>
+        <v-col
+        cols="12"
+        md="6"
+        >
+          <v-text-field
+          label="Nombre"
+          outlined
+          required
+          v-model="form.name"
+          ></v-text-field>
+        </v-col>
+        <v-col
+        cols="12"
+        md="6"
+        >
+          <v-text-field
+          label="DNI"
+          outlined
+          required
+          v-model="form.dni"
+          ></v-text-field>
+        </v-col>
+        <v-col
+        cols="12"
+        md="6"
+        >
+          <v-text-field
+          label="Telefono"
+          outlined
+          required
+          v-model="form.telefono"
+          ></v-text-field>
+        </v-col>
+        <v-col
+        cols="12"
+        md="6"
+        >
+          <v-text-field
+          label="Correo electronico"
+          outlined
+          required
+          type="email"
+          v-model="form.email"
+          ></v-text-field>
+        </v-col>
+      </v-row>
+      <v-row class="pa-3">
+        <v-btn
+        color="primary"
+        type="submit"
+        :loading="loader"
+        >
+          ACTUALIZAR
+        </v-btn>
+      </v-row>
     </form>
+    <mensaje :msg="msg" v-if="msg"/>
   </v-card>
 </template>
 
@@ -64,7 +77,11 @@ export default {
     form: new Form({
       name: "",
       email: "",
+      dni:'',
+      telefono:'',
     }),
+    loader:false,
+    msg:'',
   }),
 
   computed: mapGetters({
@@ -80,8 +97,15 @@ export default {
 
   methods: {
     async update() {
-      const { data } = await this.form.patch("/api/settings/profile");
-      this.$store.dispatch("auth/updateUser", { user: data });
+      this.loader=true;
+      this.msg='';
+      this.form.patch("/api/settings/profile").then(response=>{
+        this.msg='Actualizado';
+        this.$store.dispatch("auth/updateUser", { user: data });
+        this.loader=false;
+      }).catch(error=>{
+        this.loader=false;
+      });
     },
   },
 };

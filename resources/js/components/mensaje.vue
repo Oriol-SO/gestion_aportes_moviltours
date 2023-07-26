@@ -27,7 +27,7 @@
 export default {
   name:'mensaje',
   props:{
-    msg:{default:'msg'},
+    msg:{default:''},
     color:{default:'green '}
   },
   data: () => ({

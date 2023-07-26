@@ -1,38 +1,38 @@
 <template>
-  <v-card :title="$t('your_password')">
+  <v-card :title="$t('your_password')" class="ma-5 pa-3">
     <form @submit.prevent="update" @keydown="form.onKeydown($event)">
       <alert-success :form="form" :message="$t('password_updated')" />
 
       <!-- Password -->
       <div class="mb-3 row">
-        <label class="col-md-3 col-form-label text-md-end">{{
-          $t("new_password")
-        }}</label>
         <div class="col-md-7">
-          <input
+          <v-text-field
             v-model="form.password"
             :class="{ 'is-invalid': form.errors.has('password') }"
             class="form-control"
             type="password"
+            required
+            outlined
+            label="Contraseña"
             name="password"
-          />
+          ></v-text-field>
           <has-error :form="form" field="password" />
         </div>
       </div>
 
       <!-- Password Confirmation -->
       <div class="mb-3 row">
-        <label class="col-md-3 col-form-label text-md-end">{{
-          $t("confirm_password")
-        }}</label>
         <div class="col-md-7">
-          <input
+          <v-text-field
             v-model="form.password_confirmation"
             :class="{ 'is-invalid': form.errors.has('password_confirmation') }"
             class="form-control"
             type="password"
+            required
             name="password_confirmation"
-          />
+            outlined
+            label="Confirmar contraseña"
+          ></v-text-field>
           <has-error :form="form" field="password_confirmation" />
         </div>
       </div>

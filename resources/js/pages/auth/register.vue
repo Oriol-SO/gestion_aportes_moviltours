@@ -1,6 +1,6 @@
 <template>
   <div >
-    <v-card class="ma-3">
+    <v-card class="ma-10" color="#e6eefcdb">
       <v-card-title>
         FORMULARIO DE REGISTRO 
       </v-card-title>
@@ -98,7 +98,15 @@
             type="submit"
             :loading="loader"
             >
-              REGISTRAR
+              REGISTRATE
+            </v-btn>
+            <v-btn
+            color="primary"
+            text
+            class="ml-auto"
+            to="/login"
+            >
+              Ir a inicio
             </v-btn>
           </v-row>
         </form>
@@ -111,7 +119,8 @@
 <script>
 import Form from "vform";
  export default {
-
+  layout: "basic",
+  middleware: "guest",
   data(){
     return{
       msg:'',

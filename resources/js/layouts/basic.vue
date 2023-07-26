@@ -1,6 +1,6 @@
 <template>
-  <v-app id="inspire" class="grey lighten-3">
-    <v-main class="grey lighten-3">
+  <v-app id="inspire" class=" fondobasic">
+    <v-main >
       <child />
     </v-main>
   </v-app>
@@ -28,5 +28,12 @@ export default {
     text-decoration: none;
     text-transform: uppercase;
   }
+}
+
+.fondobasic{
+  background-image:linear-gradient(rgba(60, 39, 28, 0.9), rgba(0, 0, 0, 0.4)), url('/img/fondomovil.jpg') !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  
 }
 </style>

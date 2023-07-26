@@ -1,17 +1,22 @@
 <template>
-  <v-container fluid class="fill-height main">
+  <v-container fluid class="fill-height main" >
     <v-flex>
       <v-card
-        class="mx-auto my-auto h-100 transparente py-6"
+        class="mx-auto my-auto h-100  py-6"
         rounded="lg"
         elevation="2"
         width="380"
       >
        
 
-        <v-card-title class="d-block text-center"
-          >Iniciar sesión</v-card-title
-        >
+        <v-card-title class="d-block text-center">
+          <v-img
+          src="/img/logomovil.png"
+          :aspect-ratio="10/4"
+          contain
+          ></v-img>
+          Iniciar sesión
+        </v-card-title>
         <v-card-text>
           <v-form
             ref="form"
@@ -21,7 +26,7 @@
             <v-text-field
               dense
               v-model="form.email"
-              label="Usuario"
+              label="Correo"
               type="text"
               outlined
               prepend-inner-icon="mdi-account-outline"
@@ -52,7 +57,7 @@
 
             <v-btn
               :loading="form.busy"
-              color="green accent-3"
+              color="#2b4496"
               class="mr-4"
               type="submit"
               dark
@@ -66,6 +71,7 @@
               class="mr-4 mt-2"
               type="submit"
               block
+              color="#f07937"
               to="/register"
             >
               REGISTRATE
@@ -146,7 +152,9 @@ export default {
 </script>
 <style scoped>
 .main {
-  background-color: rgb(223, 226, 230);
+  background-image:linear-gradient(rgba(60, 39, 28, 0.9), rgba(0, 0, 0, 0.4)), url('/img/fondomovil.jpg') !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
 }
 
 .img {
