@@ -1,6 +1,6 @@
 
 <template>
-    <v-row class="fill-height">
+    <v-row class="fill-height" v-if="veiculo!=null">
         <v-col>
         <v-sheet height="64">
             <v-toolbar
@@ -42,7 +42,7 @@
             <v-spacer></v-spacer>
             </v-toolbar>
         </v-sheet>
-        <v-sheet height="600">
+        <v-sheet height="600" >
             <v-calendar
             ref="calendar"
             v-model="focus"
@@ -165,8 +165,7 @@ export default {
 
         updateRange () {
             const events = []
-
-            this.veiculo.aportaciones.forEach(element => {
+            this.veiculo.aportaciones?.forEach(element => {
                 const fechaParts = element.fecha.split('-');
                 const first = new Date(fechaParts[0], fechaParts[1] - 1, fechaParts[2]);
 
@@ -180,7 +179,7 @@ export default {
                         del:true,
                         monto:element.monto,
                         registro: element.created_at,
-                        fecha:element.fecha,
+                        fecha:element.fecha_visual,
                         id:element.id,
                     })
 
@@ -198,6 +197,10 @@ export default {
             return `${fecha[2]} de ${nombreMes} ${fecha[0]}`;
         },
 
+    },watch:{
+        veiculo(newvalor){  
+            this.updateRange()
+        }
     }
 }
 </script>

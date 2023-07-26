@@ -8,7 +8,7 @@ export default (to, from, next, roles) => {
 
   // Split roles into an array
   roles = roles.split(',')
-  console.log(user.rol_id)
+  //console.log(user.rol_id)
   //const currentrol=store.getters['auth/currentRolid']
   // Check if the user has one of the required roles...
   if (!roles.includes(user.rol_id.toString())) {

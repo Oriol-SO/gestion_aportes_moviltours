@@ -210,7 +210,7 @@ export default {
                         del:true,
                         monto:element.monto,
                         registro: element.created_at,
-                        //fecha:element.fecha,
+                        fecha:element.fecha_visual,
                         id:element.id,
                     })
 

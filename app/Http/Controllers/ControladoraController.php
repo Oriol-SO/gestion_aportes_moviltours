@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Aporte;
 use App\Models\Veiculo;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -61,7 +62,19 @@ class ControladoraController extends Controller
                     'color'=>$v->color,
                     'marca'=>$v->marca,
                     'modelo'=>$v->modelo,
-                    'aportaciones'=>$v->aporte,
+                    'aportaciones'=>$v->aporte->map(function($a){
+                        return[
+                            'id'=>$a->id,
+                            'fecha'=>$a->fecha,
+                            'fecha_visual'=>Carbon::parse($a->fecha)->format('d-m-Y'),
+                            'veiculo_id'=>$a->veiculo_id,
+                            'user_id'=>$a->user_id,
+                            'monto'=>$a->monto,
+                            'rol'=>$a->rol,
+                            'created_at'=>Carbon::parse($a->created_at)->format('d-m-Y H:i:s'),
+                            'updated_at'=>$a->updated_at,
+                        ];
+                    }),
                 ];
             });
 
